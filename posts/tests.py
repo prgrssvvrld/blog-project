@@ -51,4 +51,4 @@ class PostViewTest(TestCase):
         """Проверка поведения при запросе несуществующего поста"""
         response = self.client.get('/posts/999/')
         self.assertEqual(response.status_code, 404)
-        self.assertContains(response, "Пост не найден")
+        self.assertIn("Пост не найден", response.content.decode())
