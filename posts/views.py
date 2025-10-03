@@ -12,3 +12,11 @@ def post_list_view(request):
         html += f"<li><strong>{post.title}</strong>: {post.content[:50]}...</li>"
     html += "</ul>"
     return HttpResponse(html)
+
+def post_detail_view(request, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+        html = f"<h1>{post.title}</h1><p>{post.content}</p>"
+        return HttpResponse(html)
+    except Post.DoesNotExist:
+        return HttpResponse("<h1>Пост не найден</h1>", status=404)
